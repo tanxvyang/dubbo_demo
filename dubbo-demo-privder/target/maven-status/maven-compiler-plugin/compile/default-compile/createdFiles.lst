@@ -1,0 +1,3 @@
+provider\service\impl\UserviceImpl.class
+MainApplication.class
+provider\bean\UserAdders.class
