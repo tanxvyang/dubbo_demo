@@ -10,10 +10,13 @@
     <dubbo:application name="demo-provider"/>
 <!--    指定注册中心位置-->
     <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
+    <!--   监控中心配置-->
+    <dubbo:monitor protocol="registry"></dubbo:monitor>
 <!--    指定通信规则(协议? 端口?)-->
     <dubbo:protocol name="dubbo" port="20890"/>
 <!--    需要暴漏的服务是哪个  service interface 写接口名 ,ref 表示真正暴漏的服务名 -->
     <dubbo:service interface="dubboapi.UserService" ref="userService"/>
 <!--    服务实现类-->
     <bean id="userService" class="provider.service.impl.UserviceImpl"/>
+
 </beans>

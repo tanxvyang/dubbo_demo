@@ -14,6 +14,11 @@ public class UserviceImpl implements UserService {
     @Override
     public String getUserAdders(String name) {
         System.out.println("进入服务提供者实现类");
+        try {
+            Thread.sleep(7000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return name+"提供给你消费";
     }
 }

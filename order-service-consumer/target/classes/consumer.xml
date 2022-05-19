@@ -7,6 +7,11 @@
     <contex:component-scan base-package="consumer.service"></contex:component-scan>
     <dubbo:application name="demo-consumer"/>
     <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
-<!--    声明需要调用的远程服务接口,生成远程服务代理 -->
-    <dubbo:reference id="userService" check="false" interface="dubboapi.UserService"/>
+<!--    配置当前消费者的统一配置 ：check设置启动不检查、-->
+    <dubbo:consumer check="false"></dubbo:consumer>
+<!--    声明需要调用的远程服务接口,生成远程服务代理   check设置启动不检查、timeout设置超时ms 默认是1000-->
+    <dubbo:reference id="userService" check="false" timeout="1000" interface="dubboapi.UserService"/>
+<!--   监控中心配置-->
+    <dubbo:monitor protocol="registry"></dubbo:monitor>
+<!--    <dubbo:monitor address="127.0.0.1:7070"></dubbo:monitor>-->
 </beans>
