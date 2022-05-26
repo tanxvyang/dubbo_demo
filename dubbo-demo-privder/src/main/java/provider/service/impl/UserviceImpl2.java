@@ -10,11 +10,11 @@ import dubboapi.UserService;
  * @Description TODO
  * @createTime 2022年04月08日 13:59:00
  */
-public class UserviceImpl implements UserService {
+public class UserviceImpl2 implements UserService {
     @Override
     public String getUserAdders(String name) {
-        System.out.println("UserviceImpl...old1");
-        System.out.println("进入服务提供者实现类1");
+        System.out.println("UserviceImpl...old2");
+        System.out.println("进入服务提供者实现类2");
         try {
             Thread.sleep(7000);
         } catch (InterruptedException e) {

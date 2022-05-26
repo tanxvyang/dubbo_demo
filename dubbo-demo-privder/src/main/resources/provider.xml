@@ -15,8 +15,16 @@
 <!--    指定通信规则(协议? 端口?)-->
     <dubbo:protocol name="dubbo" port="20890"/>
 <!--    需要暴漏的服务是哪个  service interface 写接口名 ,ref 表示真正暴漏的服务名 -->
-    <dubbo:service interface="dubboapi.UserService" ref="userService"/>
+    <dubbo:service interface="dubboapi.UserService" ref="userService01" version="1.0.0">
+        <dubbo:method name="getUserAdders" timeout="1000"></dubbo:method>
+    </dubbo:service>
 <!--    服务实现类-->
-    <bean id="userService" class="provider.service.impl.UserviceImpl"/>
+    <bean id="userService01" class="provider.service.impl.UserviceImpl"/>
+
+    <!--    需要暴漏的服务是哪个  service interface 写接口名 ,ref 表示真正暴漏的服务名 -->
+    <dubbo:service interface="dubboapi.UserService" ref="userService02" version="2.0.0">
+        <dubbo:method name="getUserAdders" timeout="1000"></dubbo:method>
+    </dubbo:service>
+    <bean id="userService02" class="provider.service.impl.UserviceImpl2"/>
 
 </beans>

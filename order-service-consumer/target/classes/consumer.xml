@@ -7,10 +7,34 @@
     <contex:component-scan base-package="consumer.service"></contex:component-scan>
     <dubbo:application name="demo-consumer"/>
     <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
-<!--    配置当前消费者的统一配置 ：check设置启动不检查、-->
-    <dubbo:consumer check="false"></dubbo:consumer>
-<!--    声明需要调用的远程服务接口,生成远程服务代理   check设置启动不检查、timeout设置超时ms 默认是1000-->
-    <dubbo:reference id="userService" check="false" timeout="1000" interface="dubboapi.UserService"/>
+<!--    配置的优先级：方法> 接口 > 全局
+                1。精确优先(方法级优先、接口级次之)
+                2。消费者设置优先（如果级别一样 同级配置中消费方优先）
+-->
+
+<!--    配置当前消费者的统一配置 ：check设置启动不检查、timeout设置超时ms 默认是1000-->
+    <dubbo:consumer check="false" timeout="6000"></dubbo:consumer>
+
+<!--    声明需要调用的远程服务接口,生成远程服务代理
+check设置启动不检查、
+timeout设置超时ms 默认是1000
+retries 重试次数，不包含第一次调用；注意：在幂等（设置重试次数）【查询、删除、修改】、非幂等（不能设置重试次数）【新增】
+version 版本 当一个接口实现，出现不兼容升级时，可以用版本号过渡，版本号不同的服务相互间不引用。
+             可以按照以下的步骤进行版本迁移：
+              在低压力时间段，先升级一半提供者为新版本
+               再将所有消费者升级为新版本
+              然后将剩下的一半提供者升级为新版本
+              version 中填写相应的版本号，当不需要区分版本时，则填*
+
+ stub
+-->
+    <dubbo:reference id="userService" check="false"
+                     timeout="5000" interface="dubboapi.UserService " retries="3" version="*" stub="consumer.service.impl.UserServiceStub">
+<!--        同级配置中消费方优先  -->
+        <!--    :method 设置方法配置，超时-->
+<!--        <dubbo:method name="getUserAdders" timeout="2000"></dubbo:method>-->
+    </dubbo:reference>
+
 <!--   监控中心配置-->
     <dubbo:monitor protocol="registry"></dubbo:monitor>
 <!--    <dubbo:monitor address="127.0.0.1:7070"></dubbo:monitor>-->

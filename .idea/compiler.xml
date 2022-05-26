@@ -11,7 +11,7 @@
         <module name="dubbo-demo-privder" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="8">
       <module name="dubbo-demo-api" target="8" />
       <module name="dubbo-demo-privder" target="8" />
       <module name="order-service-consumer" target="8" />
